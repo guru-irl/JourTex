@@ -1,0 +1,44 @@
+% The real tex generator script
+% Creates a complete journal from all your created logs
+
+\documentclass{tufte-book}
+    \usepackage{lipsum}             % Used for placeholder text
+    
+    \newcommand*{\MinYear}{2018}    % Modify these two as you time progresses
+    \newcommand*{\MaxYear}{2022}   
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \title{My Amazing Journal}      % Title
+    \author{Your Amazing Name}      % Author Name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \usepackage[USenglish]{babel}   % For Regional Text.
+    \usepackage[useregional]{datetime2}
+    \usepackage{pgffor}
+
+    \begin{document}
+    
+        \maketitle
+        \selectlanguage{USenglish}
+
+        % Goes to files in every year/month/ and converts them from markdown to tex
+        \foreach \year in {\MinYear,...,\MaxYear}{
+            \foreach \month in {1,2,...,12}{
+                \foreach \day in {1,2,...,31}{
+                    \IfFileExists{../\year/\month/\day.md} {
+                        % Displays a section header for the day
+                        \section{\DTMdisplaydate{\year}{\month}{\day}{1}}
+                        
+                        % Goes to files in every year/month/ and converts them from markdown to tex
+                        \immediate\write18{pandoc ../\year/\month/\day.md -t latex -o ../texdata/\year/\month/\day.tex}
+                        
+                        % Concatenates the newly created tex file to the main journal
+                        \input{../texdata/\year/\month/\day.tex}
+                    } {  
+                        % Do Nothing if file does not exist
+                    }
+                }
+            }
+        }
+
+    \end{document}
