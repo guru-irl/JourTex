@@ -16,7 +16,7 @@ A daily journalling system that combines the simplicity of Markdown and the prof
         \author {Your Amazing Name} 
     ```
 3. Execute jourtex.sh
-    ```bash
+    ```Shell
         chmod a+x jourtex.sh
         ./jourtex.sh
     ```
@@ -26,7 +26,7 @@ A daily journalling system that combines the simplicity of Markdown and the prof
 The entire system works on structured directories. Store your Journal entries for the day as `year/month/day.md`. For example, the journal entries for April 29, 2018 should be stored in `2018/4/29.md`.
 
 Every new timestamp should be a **H2 header** in markdown.
-```markdown
+```Markdown
     ## 15:45
     Something happened today wow.
     ## 17:56
