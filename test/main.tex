@@ -1,0 +1,25 @@
+\documentclass{tufte-book}
+
+\usepackage{fancyvrb}
+
+\newenvironment{markdown}%
+    {\VerbatimEnvironment\begin{VerbatimOut}{1.md}}%
+    {\end{VerbatimOut}%
+        \immediate\write18{pandoc 1.md -t latex -o 1.tex}%
+        \input{1.tex}}
+
+\begin{document}
+
+\begin{markdown}
+# Section
+
+Some text that goes on for a while.
+
+A list:
+
+* Item
+* Another item 
+
+\end{markdown}
+
+\end{document}
