@@ -30,10 +30,10 @@
                         \section{\DTMdisplaydate{\year}{\month}{\day}{1}}
                         
                         % Goes to files in every year/month/ and converts them from markdown to tex
-                        \immediate\write18{pandoc ../\year/\month/\day.md -t latex -o ../texdata/\year/\month/\day.tex}
+                        \immediate\write18{pandoc ../\year/\month/\day.md -t latex -o ../\year/\month/\day.tex}
                         
                         % Concatenates the newly created tex file to the main journal
-                        \input{../texdata/\year/\month/\day.tex}
+                        \input{../\year/\month/\day.tex}
                     } {  
                         % Do Nothing if file does not exist
                     }
